@@ -1,13 +1,29 @@
 import { Get, Controller, Header } from '@nestjs/common';
 
-@Controller()
+@Controller('me')
 export class AppController {
   @Get()
-  @Header('content-type', 'text/html')
-  root(): string {
-    return  Object
-      .entries({hello: "hello world", bye: "bye world"})
-      .map(([key, value]) => `key(${key}): value(${value})`)
-      .join('\n');
+  root(): Object {
+    return  {
+      "id": "",
+      "email": "",
+      "language": "",
+      "timezone": "",
+      "suspend": {},
+      "marketing_mail": false,
+      "subscriptions": {
+        "marketing_mail": false,
+        "marketing_push": true,
+        "marketing_sms": true,
+        "nighttime_push": true
+      },
+      "marketing_privacy": true,
+      "block_unknown_user": false,
+      "uid": "",
+      "transfer": {
+        "allow_withdrawal": true,
+        "allow_deposit": true
+      }
+    }
   }
 }

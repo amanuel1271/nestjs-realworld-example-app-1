@@ -3,20 +3,23 @@ const {AppMiddleware} = require('./src/app.middleware');
 
 
 const app = express();
-const nestapp = new AppMiddleware(app);
 
+
+app.get ("/about" , (req, res) => {
+    res.json ({result: "hello"});
+});
+
+
+//Nest controllers go here
+const nestapp = new AppMiddleware(app, "/v3/accounts");
 app.use(async (req, res, next) => {
     try {
         await nestapp.use(req, res, next);
-        next()
+        next();
     } catch (err) {
         console.log(JSON.stringify(err));
         next();
     }
-});
-
-app.get ("/about" , (req, res) => {
-    res.json ({result: "hello"});
 });
 
 
