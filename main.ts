@@ -5,15 +5,19 @@ const {AppMiddleware} = require('./src/app.middleware');
 const app = express();
 const nestapp = new AppMiddleware(app);
 
-app.use((req, res, next) => {
-    const nest = nestapp.use(req, res, next);
-    nest.then(() => {
-      next();
-    }).catch(err => {
-      console.log(JSON.stringify(err));
-      next();
-    });
-  });
+app.use(async (req, res, next) => {
+    try {
+        await nestapp.use(req, res, next);
+        next()
+    } catch (err) {
+        console.log(JSON.stringify(err));
+        next();
+    }
+});
+
+app.get ("/about" , (req, res) => {
+    res.json ({result: "hello"});
+});
 
 
 app.listen(5000, () => {

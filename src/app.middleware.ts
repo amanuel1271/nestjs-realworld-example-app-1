@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import type {Express} from 'express';
+import type {Express, NextFunction, Request, Response} from 'express';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { ApplicationModule } from './app.module';
@@ -12,11 +12,14 @@ const bootstrap = async (express: Express.Application) => {
 
 @Injectable()
 export class AppMiddleware implements NestMiddleware {
+  bootstrap: any;
 
-  constructor(private expressInstance: Express.Application) {}
+  constructor(private expressInstance: Express.Application) {
+    this.bootstrap = bootstrap(this.expressInstance);
+  }
 
-  use(req: any, res: any, next: () => void) {
+  use(req: Request, res: Response, next: NextFunction) {
     console.log('In Nest middleware');
-    return bootstrap(this.expressInstance);
+    return this.bootstrap;
   }
 }
