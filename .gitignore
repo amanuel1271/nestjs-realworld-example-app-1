@@ -17,6 +17,8 @@ node_modules
 #config files
 ormconfig.json
 src/config.ts
+docker-compose.yml
+
 
 # code testing coverage
 coverage
