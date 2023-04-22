@@ -9,20 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 let AppController = class AppController {
     root() {
-        return 'Hello World!';
+        return {
+            "id": "",
+            "email": "",
+            "language": "",
+            "timezone": "",
+            "suspend": {},
+            "marketing_mail": false,
+            "subscriptions": {
+                "marketing_mail": false,
+                "marketing_push": true,
+                "marketing_sms": true,
+                "nighttime_push": true
+            },
+            "marketing_privacy": true,
+            "block_unknown_user": false,
+            "uid": "",
+            "transfer": {
+                "allow_withdrawal": true,
+                "allow_deposit": true
+            }
+        };
     }
 };
 __decorate([
     common_1.Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
+    __metadata("design:returntype", Object)
 ], AppController.prototype, "root", null);
 AppController = __decorate([
-    common_1.Controller()
+    common_1.Controller('me')
 ], AppController);
 exports.AppController = AppController;
 //# sourceMappingURL=app.controller.js.map

@@ -13,6 +13,7 @@ node_modules
 
 #IDEs
 .idea
+dist
 
 #config files
 ormconfig.json
